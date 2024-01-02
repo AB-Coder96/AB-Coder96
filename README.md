@@ -1,5 +1,5 @@
-# Hello, I'm [Your Name] 👋
-## [Your Tagline/Current Role]
+# Hello, I'm Araz 👋
+## Electrical and Computer Engineer
 <!-- Banner/GIF: Embed an eye-catching banner or GIF here -->
 ### About Me
 
