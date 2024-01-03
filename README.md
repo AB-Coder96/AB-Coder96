@@ -1,6 +1,5 @@
-### Contact Me
+### Links
 
 - 📧 [Email](mailto:arazbagherzadeh@gmail.com)
-- 🌐 [Personal Website](YourWebsiteURL)
-- 💼 [LinkedIn](YourLinkedInProfile)
-- 🐦 [Twitter](YourTwitterProfile)
+- 🌐 [Portfolio](YourWebsiteURL)
+- 💼 [LinkedIn](https://www.linkedin.com/in/araz-karimi-0b2600290/)
