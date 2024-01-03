@@ -7,5 +7,5 @@ excel_data = pd.read_excel('Portfolio.xlsx')
 html_table = excel_data.to_html()
 
 # Save HTML to a file
-with open('docs/portfolio.html', 'w') as file:
+with open('docs/AB-Coder96.html', 'w') as file:
     file.write(html_table)
