@@ -1,4 +1,6 @@
+python ExceltoWord.py
+python WordtoHTML.py
 Git add .
-Git commit -m"regular updates"
+Git commit -m"Skills Updated"
 Git push
 pause
