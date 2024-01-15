@@ -30,7 +30,7 @@ def generate_html_from_elements(elements):
                     html_content += f"<td>{cell_data}</td>"
                 html_content += "</tr>\n"
             html_content += "</table>\n"
-
+    print(html_content)
     return html_content
 
 def generate_html_css_from_docx(docx_file, output_html_file):
