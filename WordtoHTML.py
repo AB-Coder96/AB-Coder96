@@ -30,7 +30,7 @@ def generate_html_from_elements(elements):
                     html_content += f"<td>{cell_data}</td>"
                 html_content += "</tr>\n"
             html_content += "</table>\n"
-    print(html_content)
+
     return html_content
 
 def generate_html_css_from_docx(docx_file, output_html_file):
@@ -48,4 +48,8 @@ def generate_html_css_from_docx(docx_file, output_html_file):
     with open(output_html_file, "w", encoding="utf-8") as html_file:
         html_file.write(html_content)
 
-#
+# Replace 'input_word.docx' with the path to your Word file
+input_word_file = 'portfolio Araz Karimi.docx'
+output_html_file = 'docs/index.html'
+
+generate_html_css_from_docx(input_word_file, output_html_file)
