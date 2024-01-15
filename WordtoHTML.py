@@ -10,7 +10,7 @@ def extract_paragraphs_and_tables(docx_file):
         elif element.tag.endswith('tbl'):  # Table
             table_data = []
             for row in element:
-                row_data = [cell.text.strip() for cell in row]
+                row_data = [cell.text.strip() if cell.text else '' for cell in row]
                 table_data.append(row_data)
             combined_list.append({'type': 'table', 'content': table_data})
 
