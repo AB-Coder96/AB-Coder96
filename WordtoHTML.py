@@ -5,7 +5,7 @@ def extract_paragraphs_and_tables(docx_file):
     combined_list = []
 
     for element in doc.element.body:
-        if element.tag.endswith('p'):  # Paragraph
+        if element.tag.endswith('p') and element.text:  # Paragraph with text
             combined_list.append({'type': 'paragraph', 'content': element.text.strip()})
         elif element.tag.endswith('tbl'):  # Table
             table_data = []
