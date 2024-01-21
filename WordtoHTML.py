@@ -22,9 +22,10 @@ def generate_html_css_from_docx(docx_file, output_html_file):
     paragraphs, tables = extract_paragraphs_and_tables(docx_file)
 
     html_content = "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n"
-    html_content += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css' integrity='sha384-rGp68ppUyMMd6JAiyr5K1SfSvYY4GYvRnfT2XrSP7z2S+YYZxM3R8yf+BxyiXagD' crossorigin='anonymous'>\n"
-    html_content += "<style>\nbody {\nfont-family: Arial, sans-serif;\nmargin: 20px;\nbackground-image: url('your_background_image.jpg');\nbackground-size: cover;\n}\n"
-    html_content += "table {\nborder-collapse: collapse;\nmargin: 0 auto;\nbackground-color: white;\n}\ntable, th, td {\nborder: 1px solid black;\npadding: 5px;\n}\n"
+    html_content += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css' integrity='sha384-rGp68ppUyMMd6JAiyr5K1SfSvYY4GYvRnfT2XrSP7z2S+YYZxM3R8yf+BxyiXagD' "
+    html_content += "crossorigin='anonymous'>\n"
+    html_content += "<style>\nbody {\nfont-family: Arial, sans-serif;\nmargin: 20px;\n}\n"
+    html_content += "table {\nborder-collapse: collapse;\nmargin: 0 auto;\n}\ntable, th, td {\nborder: 1px solid black;\npadding: 5px;\n}\n"
     html_content += "h1, p {\ntext-align: center;\n}\n"
     html_content += "footer {\nposition: fixed;\nbottom: 0;\nwidth: 100%;\nbackground-color: #333;\ntext-align: center;\npadding: 10px;\n"
     html_content += "color: white;\n}\n"
