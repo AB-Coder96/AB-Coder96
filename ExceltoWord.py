@@ -1,58 +1,78 @@
-import pandas as pd
-from openpyxl import load_workbook
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Alignment
+from docx import Document
 
-# Load Excel file and read sheet
-excel_file = 'Portfolio.xlsx'
-excel_data = pd.read_excel(excel_file)
-wb = load_workbook(excel_file)
-sheet = wb.active
+# Create Excel workbook and add data to "skills" sheet
+wb = Workbook()
+ws = wb.active
+ws.title = "skills"
 
-# Convert to HTML
-html_table = excel_data.to_html(classes='styled-table', index=False)
+# Sample data for the first two columns
+data_col1_col2 = [
+    ["Skill 1", "Description 1"],
+    ["Skill 2", "Description 2"],
+    # Add more rows as needed
+]
 
-# Extract cell colors and generate CSS
-css_styles = ''
-for row in sheet.iter_rows():
-    for cell in row:
-        if cell.fill.start_color.index != '00000000':
-            color = cell.fill.start_color.rgb
-            css_styles += f'.styled-table tr:nth-child({cell.row}):nth-child({cell.column}) td:nth-child({cell.column}) {{ background-color: {color}; }}\n'
+# Populate the first two columns
+for row in data_col1_col2:
+    ws.append(row)
 
-# HTML code with added CSS style
-html_with_style = f'''
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Portfolio</title>
-    <style>
-        /* Define your CSS styles here */
-        .styled-table {{
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-        }}
-        
-        .styled-table th, .styled-table td {{
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }}
-        
-        .styled-table th {{
-            background-color: #f2f2f2;
-        }}
-        
-        /* Generated cell color styles */
-        {css_styles}
-    </style>
-</head>
-<body>
-    <h1>Portfolio</h1>
-    {html_table}
-</body>
-</html>
-'''
+# Create additional sheets for "projects" and populate tables
+for i in range(3, 7, 2):
+    # Sample data for columns i, i+1
+    data_col_i_i1 = [
+        [f"Project {i}", f"Description {i}"],
+        [f"Project {i+1}", f"Description {i+1}"],
+        # Add more rows as needed
+    ]
 
-# Save HTML to a file
-with open('docs/index.html', 'w') as file:
-    file.write(html_with_style)
+    # Create a new sheet for each pair of columns
+    ws_proj = wb.create_sheet(title=f"projects_{i}_{i+1}")
+
+    # Populate the table in the new sheet
+    for row in data_col_i_i1:
+        ws_proj.append(row)
+
+# Save the Excel workbook
+wb.save("projects.xlsx")
+
+# Create Word document and add content
+doc = Document()
+
+# Add header "Skills" to Word document
+doc.add_heading("Skills", level=1)
+
+# Add the first two columns from the "skills" sheet to the Word document
+for row in data_col1_col2:
+    table = doc.add_table(rows=1, cols=2)
+    table.style = 'Table Grid'
+    table.autofit = False
+    for j, cell_data in enumerate(row):
+        cell = table.cell(0, j)
+        cell.text = cell_data
+
+# Add headers and tables from each "projects" sheet to the Word document
+for i in range(3, 7, 2):
+    sheet_name = f"projects_{i}_{i+1}"
+    doc.add_heading(f"Full List of Projects - {sheet_name}", level=1)
+
+    # Retrieve data from the corresponding sheet
+    ws_proj = wb[sheet_name]
+    data_proj = [list(row) for row in ws_proj.iter_rows(values_only=True)]
+
+    # Add table to Word document
+    table = doc.add_table(rows=1, cols=2)
+    table.style = 'Table Grid'
+    table.autofit = False
+    for row in data_proj:
+        table.add_row()
+        for j, cell_data in enumerate(row):
+            cell = table.cell(table.rows.index(table.last_row), j)
+            cell.text = cell_data
+
+# Save the Word document
+doc.save("portfolio.docx")
+
+print("Portfolio created successfully.")
