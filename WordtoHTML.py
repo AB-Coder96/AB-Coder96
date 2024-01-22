@@ -56,6 +56,25 @@ def generate_html_css_from_docx(docx_file, output_html_file):
                 # Display the table
                 html_content += tables[i - 1] + "\n"
 
+            # Check if this is the last paragraph
+            if i == len(paragraphs) - 1:
+                # Add code to embed PDF using PDF.js
+                html_content += "<canvas id='pdf-render'></canvas>\n"
+                html_content += "<script src='https://mozilla.github.io/pdf.js/build/pdf.js'></script>\n"
+                html_content += "<script>\n"
+                html_content += "const pdfUrl = 'Imbalance_paper.pdf';\n"  # Update this line with the correct PDF file name
+                html_content += "pdfjsLib.getDocument(pdfUrl).then(pdf => {\n"
+                html_content += "pdf.getPage(1).then(page => {\n"
+                html_content += "const canvas = document.getElementById('pdf-render');\n"
+                html_content += "const context = canvas.getContext('2d');\n"
+                html_content += "const viewport = page.getViewport({ scale: 1.5 });\n"
+                html_content += "canvas.width = viewport.width;\n"
+                html_content += "canvas.height = viewport.height;\n"
+                html_content += "page.render({ canvasContext: context, viewport: viewport });\n"
+                html_content += "});\n"
+                html_content += "});\n"
+                html_content += "</script>\n"
+
         i += 1
 
     # Add HTML footer with date modified, links, and email
