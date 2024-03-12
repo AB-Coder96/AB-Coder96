@@ -21,6 +21,14 @@ def extract_paragraphs_and_tables(docx_file):
 def generate_html_css_from_docx(docx_file, output_html_file):
     paragraphs, tables = extract_paragraphs_and_tables(docx_file)
 
+    print("Paragraphs:")
+    for i, paragraph in enumerate(paragraphs):
+        print(f"Paragraph {i + 1}: {paragraph}")
+
+    print("\nTables:")
+    for i, table in enumerate(tables):
+        print(f"Table {i + 1}:\n{table}")
+
     html_content = "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n"
     html_content += "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css' integrity='sha384-rGp68ppUyMMd6JAiyr5K1SfSvYY4GYvRnfT2XrSP7z2S+YYZxM3R8yf+BxyiXagD' "
     html_content += "crossorigin='anonymous'>\n"
@@ -97,7 +105,7 @@ def generate_html_css_from_docx(docx_file, output_html_file):
         html_file.write(html_content)
 
 # Replace 'input_word.docx' with the path to your Word file
-input_word_file = 'portfolio Araz Karimi.docx'
+input_word_file = 'Araz B Karimi Portfolio.docx'
 output_html_file = 'docs/index.html'
 
 generate_html_css_from_docx(input_word_file, output_html_file)
