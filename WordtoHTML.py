@@ -8,16 +8,24 @@ def extract_paragraphs_and_tables(docx_file):
 
     for table in doc.tables:
         table_html = "<table border='1'>"
-        for row in table.rows:
+        
+        # Add the header row with color shading
+        table_html += "<tr style='background-color: #808080;'>"
+        for cell in table.rows[0].cells:
+            table_html += f"<th>{cell.text}</th>"
+        table_html += "</tr>"
+        
+        # Add the remaining rows
+        for row in table.rows[1:]:
             table_html += "<tr>"
             for cell in row.cells:
                 table_html += f"<td>{cell.text}</td>"
             table_html += "</tr>"
+        
         table_html += "</table>"
         tables_html.append(table_html)
 
     return paragraphs, tables_html
-
 def generate_html_css_from_docx(docx_file, output_html_file):
     paragraphs, tables = extract_paragraphs_and_tables(docx_file)
 
@@ -38,52 +46,50 @@ def generate_html_css_from_docx(docx_file, output_html_file):
     html_content += "footer {\nposition: fixed;\nbottom: 0;\nwidth: 100%;\nbackground-color: #333;\ntext-align: center;\npadding: 10px;\n"
     html_content += "color: white;\n}\n"
     html_content += "footer a {\ncolor: white;\n}\n"
+    html_content += ".table-container {\n display: flex;\n }\n"
+    html_content += ".table-container table {\n flex: 1;\n margin-right: 20px;\n}\n" 
     html_content += "</style>\n</head>\n<body>\n"
 
     # Add the first paragraph as an <h1> header
     if paragraphs:
         html_content += f"<h1>{paragraphs[0]}</h1>\n"
+    html_content += f"<p>{paragraphs[1]}</p>\n"
+    html_content += "<div class='table-container'>\n"
+    html_content += tables[0] + "\n"
+    html_content += tables[1] + "\n"
+    html_content += "</div>\n"
+    # Check if the current paragraph is at index 4
+    html_content += f"<p>{paragraphs[4]}</p>\n"
+    # Display the table
+    html_content += "<div class='table-container'>\n"
+    html_content += tables[2] + "\n"
+    html_content += tables[3] + "\n"
+    html_content += "</div>\n"
+    html_content += f"<p>{paragraphs[6]}</p>\n"
+    # Display the table
+    html_content += "<div class='table-container'>\n"
+    html_content += tables[4] + "\n"
+    html_content += tables[5] + "\n"
+    html_content += "</div>\n"
+    html_content += f"<h1>{paragraphs[9]}</h1>\n"
+    html_content += tables[6] + "\n"
+    # Add code to embed PDF using PDF.js
+    html_content += "<canvas id='pdf-render'></canvas>\n"
+    html_content += "<script src='https://mozilla.github.io/pdf.js/build/pdf.js'></script>\n"
+    html_content += "<script>\n"
+    html_content += "const pdfUrl = 'Imbalance_paper.pdf';\n"  # Update this line with the correct PDF file name
+    html_content += "pdfjsLib.getDocument(pdfUrl).then(pdf => {\n"
+    html_content += "pdf.getPage(1).then(page => {\n"
+    html_content += "const canvas = document.getElementById('pdf-render');\n"
+    html_content += "const context = canvas.getContext('2d');\n"
+    html_content += "const viewport = page.getViewport({ scale: 1.5 });\n"
+    html_content += "canvas.width = viewport.width;\n"
+    html_content += "canvas.height = viewport.height;\n"
+    html_content += "page.render({ canvasContext: context, viewport: viewport });\n"
+    html_content += "});\n"
+    html_content += "});\n"
+    html_content += "</script>\n"
 
-    # Iterate through paragraphs and tables, excluding the first paragraph
-    i = 1
-    while i < len(paragraphs):
-        # Check if the current paragraph is at index 4
-        if i == 4:
-            html_content += f"<h1>{paragraphs[i]}</h1>\n"
-            # Check if there is a corresponding table for this paragraph
-            if i - 1 < len(tables):
-                # Display the table
-                html_content += tables[i - 1] + "\n"
-            i += 1  # Skip the next iteration as the table is already handled
-        else:
-            # Display paragraph
-            html_content += f"<p>{paragraphs[i]}</p>\n"
-            
-            # Check if there is a corresponding table for this paragraph
-            if i - 1 < len(tables):
-                # Display the table
-                html_content += tables[i - 1] + "\n"
-
-            # Check if this is the last paragraph
-            if i == len(paragraphs) - 1:
-                # Add code to embed PDF using PDF.js
-                html_content += "<canvas id='pdf-render'></canvas>\n"
-                html_content += "<script src='https://mozilla.github.io/pdf.js/build/pdf.js'></script>\n"
-                html_content += "<script>\n"
-                html_content += "const pdfUrl = 'Imbalance_paper.pdf';\n"  # Update this line with the correct PDF file name
-                html_content += "pdfjsLib.getDocument(pdfUrl).then(pdf => {\n"
-                html_content += "pdf.getPage(1).then(page => {\n"
-                html_content += "const canvas = document.getElementById('pdf-render');\n"
-                html_content += "const context = canvas.getContext('2d');\n"
-                html_content += "const viewport = page.getViewport({ scale: 1.5 });\n"
-                html_content += "canvas.width = viewport.width;\n"
-                html_content += "canvas.height = viewport.height;\n"
-                html_content += "page.render({ canvasContext: context, viewport: viewport });\n"
-                html_content += "});\n"
-                html_content += "});\n"
-                html_content += "</script>\n"
-
-        i += 1
 
     # Add HTML footer with date modified, links, and email
     date_modified = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
