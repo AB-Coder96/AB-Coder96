@@ -41,6 +41,39 @@ color: white;
 </style>
 </head>
 <body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+</style>
+<div style='text-align: center;'>
+    <div style='display: inline-block; background-color: #f0f8ff; padding: 10px; border-radius: 5px; font-family: Roboto, sans-serif;'>
+        <div style='font-size: 20px; color: #00008b;'>Years of Experience:</div>
+        <div class='counter' id='years-counter' style='font-size: 24px; color: #00008b;'>0</div>
+    </div>
+    <div style='display: inline-block; background-color: #f0f8ff; padding: 10px; border-radius: 5px; font-family: Roboto, sans-serif;'>
+        <div style='font-size: 20px; color: #00008b;'>Projects Completed:</div>
+        <div class='counter' id='projects-counter' style='font-size: 24px; color: #00008b;'>0</div>
+    </div>
+</div>
+<script>
+    const yearsCounter = document.getElementById('years-counter');
+    const projectsCounter = document.getElementById('projects-counter');
+    let years = 0;
+    let projects = 0;
+    const yearsIncrement = 4 / 200; // Decreased increment for slower animation
+    const projectsIncrement = 23 / 200; // Decreased increment for slower animation
+    function animateCounters() {
+        if (years < 4) {
+            years += yearsIncrement;
+            yearsCounter.innerText = Math.round(years);
+        }
+        if (projects < 23) {
+            projects += projectsIncrement;
+            projectsCounter.innerText = Math.round(projects);
+        }
+        requestAnimationFrame(animateCounters);
+    }
+    animateCounters();
+</script>
 <h1>Skills</h1>
 <p>Power System Analysis</p>
 <div class='table-container'>
@@ -80,7 +113,7 @@ page.render({ canvasContext: context, viewport: viewport });
 <footer>
 Made by Araz Karimi<br>
 <a href='https://github.com/AB-Coder96' target='_blank'><i class='fab fa-github'></i> GitHub</a> | <a href='https://www.linkedin.com/in/araz-karimi-0b2600290/' target='_blank'><i class='fab fa-linkedin'></i> LinkedIn</a> | <a href='mailto:arazbagherzadeh@gmail.com'><i class='far fa-envelope'></i> arazbagherzadeh@gmail.com</a><br>
-Date Modified: 2024-04-05 20:50:31
+Date Modified: 2024-04-05 22:51:02
 </footer>
 </body>
 </html>
