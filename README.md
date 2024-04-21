@@ -1,4 +1,7 @@
-## Links
+Welcome! 
+This is a Source for my projects in software development and power systems. 
+
+## Other Links
 
 - 📧 [Email](mailto:arazbagherzadeh@gmail.com)
 - 🌐 [Portfolio](https://ab-coder96.github.io/AB-Coder96/)
