@@ -1,7 +1,4 @@
-## Hi there 👋
-
-I build performance-sensitive systems in **C++** and **Python** — low-latency pipelines, benchmarking, and observability.
-I also do **power-grid automation / digital substation work** (IEC 61850) as an independent contributor on selected projects.
+## Performance-sensitive systems in **C++** and **Python** — low-latency pipelines, benchmarking, and observability.
 
 - https://zetaslate.com
 
@@ -11,6 +8,3 @@ I also do **power-grid automation / digital substation work** (IEC 61850) as an 
 - **ZetaOps** — control-room dashboard for runs/latency/attribution (React + Python)
 - **ZetaXDP** — kernel-bypass UDP ingest prototype (Linux / AF_XDP)
 
-## Power systems (select work)
-- Low Latency IEC 61850 networking.
-- Convex optimized Power System OPF
