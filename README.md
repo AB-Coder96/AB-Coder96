@@ -1,16 +1,16 @@
 ## Hi there 👋
 
-<!--
-**AB-Coder96/AB-Coder96** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I build performance-sensitive systems in **C++** and **Python** — low-latency pipelines, benchmarking, and observability.
+I also do **power-grid automation / digital substation work** (IEC 61850) as an independent contributor on selected projects.
 
-Here are some ideas to get you started:
+- https://zetaslate.com
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Current focus (Zetaslate)
+- **ZetaForge** — deterministic replay + execution lab (C++20)
+- **ZetaLatency** — tail-latency benchmarks (C++20)
+- **ZetaOps** — control-room dashboard for runs/latency/attribution (React + Python)
+- **ZetaXDP** — kernel-bypass UDP ingest prototype (Linux / AF_XDP)
+
+## Power systems (select work)
+- Low Latency IEC 61850 networking.
+- Convex optimized Power System OPF
